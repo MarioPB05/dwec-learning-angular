@@ -1,0 +1,24 @@
+<div class="max-w-sm">
+  <div class="flex mb-2 space-x-2 rtl:space-x-reverse">
+    <div>
+      <label for="code-1" class="mt-2 text-sm text-center text-gray-400">Horas</label>
+      <input type="text" maxlength="2" id="code-1" value={{hour}} disabled
+             class="block w-20 h-20 py-3 text-xl font-bold text-center text-white bg-gray-700 border border-gray-600 rounded-lg focus:ring-primary-500 focus:border-primary-500 placeholder-gray-400"
+             required/>
+    </div>
+    <div>
+      <label for="code-2" class="mt-2 text-sm text-center text-gray-400">Minutos</label>
+      <input type="text" maxlength="2" data-focus-input-next="code-3" id="code-2" value={{minute}} disabled
+             class="block w-20 h-20 py-3 text-xl font-bold text-center text-white bg-gray-700 border border-gray-600 rounded-lg focus:ring-primary-500 focus:border-primary-500 placeholder-gray-400"
+             required/>
+    </div>
+    <div>
+      <label for="code-3" class="mt-2 text-sm text-center text-gray-400">Segundos</label>
+      <input type="text" maxlength="2" data-focus-input-next="code-4" id="code-3" value={{second}} disabled
+             class="block w-20 h-20 py-3 text-xl font-bold text-center text-white bg-gray-700 border border-gray-600 rounded-lg focus:ring-primary-500 focus:border-primary-500 placeholder-gray-400"
+             required/>
+    </div>
+  </div>
+
+  <button (click)="stopInterval()" class="rounded bg-white text-blue-600 font-bold px-10 py-2 mt-4">Parar el tiempo</button>
+</div>

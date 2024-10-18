@@ -1,0 +1,27 @@
+<h2 class="text-2xl font-semibold text-white">{{buttonText}}</h2>
+
+<form [formGroup]="setTimerForm" (ngSubmit)="onSubmit()" class="max-w-sm mt-4">
+  <div class="flex mb-2 space-x-2 rtl:space-x-reverse">
+    <div>
+      <label for="code-1" class="mt-2 text-sm text-center text-gray-400">Horas</label>
+      <input type="text" maxlength="2" id="code-1" formControlName="hour"
+             class="block w-20 h-20 py-3 text-xl font-bold text-center text-white bg-gray-700 border border-gray-600 rounded-lg placeholder-gray-400"
+             [ngClass]="{'border-red-600': setTimerForm.controls['hour'].hasError('invalidNumber')}" required/>
+    </div>
+    <div>
+      <label for="code-2" class="mt-2 text-sm text-center text-gray-400">Minutos</label>
+      <input type="text" maxlength="2" id="code-2" formControlName="minute"
+             class="block w-20 h-20 py-3 text-xl font-bold text-center text-white bg-gray-700 border border-gray-600 rounded-lg focus:ring-primary-500 focus:border-primary-500 placeholder-gray-400"
+             [ngClass]="{'border-red-600': setTimerForm.controls['minute'].hasError('invalidNumber')}" required/>
+    </div>
+    <div>
+      <label for="code-3" class="mt-2 text-sm text-center text-gray-400">Segundos</label>
+      <input type="text" maxlength="2" id="code-3" formControlName="second"
+             class="block w-20 h-20 py-3 text-xl font-bold text-center text-white bg-gray-700 border border-gray-600 rounded-lg focus:ring-primary-500 focus:border-primary-500 placeholder-gray-400"
+             [ngClass]="{'border-red-600': setTimerForm.controls['second'].hasError('invalidNumber')}" required/>
+    </div>
+  </div>
+
+  <button *ngIf="!isRunning" type="submit" class="mt-4 text-nowrap text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Iniciar Temporizador</button>
+  <button *ngIf="isRunning" (click)="stopTimer()" type="button" class="mt-4 text-nowrap focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Parar Temporizador</button>
+</form>

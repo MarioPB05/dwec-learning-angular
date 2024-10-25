@@ -15,6 +15,7 @@ export class NuevoComentarioComponent {
   @Output() onNewComment: EventEmitter<string> = new EventEmitter();
 
   saveComment() {
+    if (!this.comment || this.comment.trim()) return;
     this.onNewComment.emit(this.comment);
     this.comment = '';
   }

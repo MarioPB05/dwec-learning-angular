@@ -1,0 +1,58 @@
+<div class="grid gap-4 grid-cols-1 lg:grid-cols-[1fr_auto] h-full">
+  <div class="lg:overflow-y-scroll order-2 lg:order-1">
+    <h2 class="mb-6">Productos</h2>
+
+    <div class="grid gap-4 grid-cols-1 lg:grid-cols-2 md:mb-8 xl:grid-cols-3">
+      <app-producto (productoAgregado)="addProduct($event)" *ngFor="let producto of productos" [producto]="producto"></app-producto>
+    </div>
+  </div>
+
+  <div class="flex flex-col items-center justify-between right-0 order-1 lg:order-2 border-b-2 border-gray-500 pb-8 lg:pb-0 lg:border-0 lg:min-w-[400px]">
+    <h2 class="mb-6">Lista de la compra</h2>
+
+    <div class="flex-1 w-full flex flex-col justify-between pb-6">
+      <div>
+        <div *ngIf="carrito.length === 0" class="flex items-center p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+          <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+          </svg>
+          <span class="sr-only">Info</span>
+          <div>
+            <span class="font-medium">Atento!</span> No tienes productos en el carrito.
+          </div>
+        </div>
+
+        <div *ngFor="let productoCarrito of carrito" class="w-full mb-4 flex it justify-between min-w-[400px] items-center border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600 px-6 py-4">
+          <div class="flex gap-4 items-center text-gray-400">
+            <input type="text" maxlength="2" data-focus-input-next="code-3" id="code-2" disabled [value]="productoCarrito.cantidad"
+                   class="block w-10 h-10 py-3 text-xl font-bold text-center text-white bg-gray-700 border border-gray-600 rounded-lg focus:ring-primary-500 focus:border-primary-500 placeholder-gray-400"
+                   required/>
+            <div>
+              <p>{{productoCarrito.producto.nombre}}</p>
+              <p>{{productoCarrito.producto.precio}} €/Ud. | {{calculateTotalProduct(productoCarrito)}} € </p>
+            </div>
+          </div>
+
+          <div class="flex gap-2">
+            <button (click)="increaseQuantity(productoCarrito)" type="button" class="w-[40px] h-[40px] flex items-center justify-center text-white bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm text-center">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+              </svg>
+            </button>
+            <button (click)="decreaseQuantity(productoCarrito)" type="button" class="w-[40px] h-[40px] flex items-center justify-center text-white bg-red-500 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm text-center">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex justify-center lg:border-b-2 border-gray-500 pt-2 lg:pt-0 pb-2 lg:pb-6">
+        <p class="text-4xl font-bold">{{calculateTotal()}} €</p>
+      </div>
+    </div>
+
+    <button type="button" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Pagar Pedido</button>
+  </div>
+</div>
